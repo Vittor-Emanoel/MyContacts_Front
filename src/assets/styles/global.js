@@ -8,13 +8,18 @@ export default createGlobalStyle`
       font-family: 'Sora', sans-serif;
     }
     body {
-        background: #F6F5FC;
+        background: ${({theme}) => theme.backgroundColor};
+        --webkit-font-smoothing: antialiased;
     }
 
     body, input, textarea, button {
     font-family: 'Sora', sans-serif;
     font-weight: 400;
     font-size: 1rem;
-  }
+    }
+
+    button {
+      cursor: pointer;
+    }
 
 `
