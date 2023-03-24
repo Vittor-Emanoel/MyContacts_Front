@@ -3,12 +3,13 @@ import { ThemeProvider } from "styled-components";
 //Styles
 import GlobalStyles from "../../assets/styles/global";
 import defaultTheme from "../../assets/styles/themes/default";
-import Header from "../Header";
 
 //Component Styled
 import { Container } from "./styles";
 
 //Componentes
+import ContactsLists from "../ContactsLists";
+import Header from "../Header";
 
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
       
         <Container>
           <Header />
+          <ContactsLists />
         </Container>
     </ThemeProvider>
   );
