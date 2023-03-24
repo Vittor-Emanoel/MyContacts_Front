@@ -1,9 +1,14 @@
-import { Container } from "./styles"
+import { Container, Header } from "./styles"
 
 const ContactsLists = () => {
   return (
       <Container>
-        ContactsLists
+        <Header>
+          <strong>
+            3 contatos
+          </strong>
+          <a href="">Novo contato</a>
+        </Header>
       </Container>
   )
 }

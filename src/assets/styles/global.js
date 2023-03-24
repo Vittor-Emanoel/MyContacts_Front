@@ -8,7 +8,7 @@ export default createGlobalStyle`
       font-family: 'Sora', sans-serif;
     }
     body {
-        background: ${({theme}) => theme.backgroundColor};
+        background: ${({theme}) => theme.colors.background};
         --webkit-font-smoothing: antialiased;
     }
 
