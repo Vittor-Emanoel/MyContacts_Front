@@ -16,9 +16,9 @@ export default {
       dark: '#F63131',
     },
     gray: {
-      gray_100: '#E6E6E6',
-      gray_200: '#BCBCBC',
-      gray_900: '#222222',
+      100: '#E6E6E6',
+      200: '#BCBCBC',
+      900: '#222222',
     },
   },
 };
