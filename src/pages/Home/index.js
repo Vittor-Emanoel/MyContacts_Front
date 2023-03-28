@@ -10,10 +10,12 @@ import {
 import arrow from '../../assets/icons/Arrow.svg';
 import edit from '../../assets/icons/Edit.svg';
 import trash from '../../assets/icons/Trash.svg';
+import Modal from '../../components/Modal';
 
 export default function Home() {
   return (
     <Container>
+      <Modal />
       <InputSearchContainer>
         <input type="text" placeholder="Pesquisar contato..." />
       </InputSearchContainer>
@@ -44,46 +46,6 @@ export default function Home() {
             <Link to="/edit/1212">
               <img src={edit} alt="edit" />
             </Link>
-            <button type="button">
-              <img src={trash} alt="delet" />
-            </button>
-          </div>
-        </Card>
-
-        <Card>
-          <div className="info">
-            <div className="contact-name">
-              <strong>Vittor Emanoel</strong>
-              <small>instagram</small>
-            </div>
-            <span>vittore.dev@gmail.com</span>
-            <span>(11) 99999-9999</span>
-          </div>
-
-          <div className="actions">
-            <a href="/">
-              <img src={edit} alt="edit" />
-            </a>
-            <button type="button">
-              <img src={trash} alt="deleted" />
-            </button>
-          </div>
-        </Card>
-
-        <Card>
-          <div className="info">
-            <div className="contact-name">
-              <strong>Vittor Emanoel</strong>
-              <small>instagram</small>
-            </div>
-            <span>vittore.dev@gmail.com</span>
-            <span>(11) 99999-9999</span>
-          </div>
-
-          <div className="actions">
-            <a href="/">
-              <img src={edit} alt="edit" />
-            </a>
             <button type="button">
               <img src={trash} alt="delet" />
             </button>
