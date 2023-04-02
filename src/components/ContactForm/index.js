@@ -11,6 +11,9 @@ import Select from '../Select';
 // Styles
 import { ButtonContainer, Form } from './styles';
 
+// CustomHooks
+import useErrors from '../../hooks/useErrors';
+
 // Controlled Componentes = Responsabilidade do react, renderiza a cada letra
 // Uncontrolled Componentes = Javascript puro(useRef)
 
@@ -20,18 +23,15 @@ export default function ContactForm({ buttonLabel }) {
   const [phone, setPhone] = useState('');
   const [category, setCategory] = useState('');
 
-  const [errors, setErrors] = useState([]);
+  const { setError, removeError, getErrorMessageByFieldName } = useErrors();
 
   function handleNameChange({ target }) {
     setName(target.value);
 
     if (!target.value) {
-      setErrors((prevState) => [
-        ...prevState,
-        { field: 'name', message: 'Nome é Obrigatório' },
-      ]);
+      setError({ field: 'name', message: 'Nome Obrigatório' });
     } else {
-      setErrors((prevState) => prevState.filter((error) => error.field !== 'name'));
+      removeError('name');
     }
   }
 
@@ -39,23 +39,10 @@ export default function ContactForm({ buttonLabel }) {
     setEmail(target.value);
 
     if (target.value && !isEmailValid(target.value)) {
-      const errorAlreadyExists = errors.find((error) => error.field === 'email');
-
-      if (errorAlreadyExists) {
-        return;
-      }
-
-      setErrors((prevState) => [
-        ...prevState,
-        { field: 'email', message: 'Email inválido' },
-      ]);
+      setError({ field: 'email', message: 'E-mail Inválido' });
     } else {
-      setErrors((prevState) => prevState.filter((error) => error.field !== 'email'));
+      removeError('email');
     }
-  }
-
-  function getErrorMessageByFieldName(fieldName) {
-    return errors.find((error) => error.field === fieldName)?.message;
   }
 
   function handleSubmit(event) {
@@ -67,10 +54,6 @@ export default function ContactForm({ buttonLabel }) {
       category,
     });
   }
-
-  console.log(getErrorMessageByFieldName('name'));
-
-  console.log(errors);
 
   return (
     <Form onSubmit={handleSubmit}>
