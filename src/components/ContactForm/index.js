@@ -1,9 +1,14 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import isEmailValid from '../../utils/isEmailValid';
+
+// Components
 import Button from '../Button';
 import FormGroup from '../FormGroup';
 import Input from '../Input';
 import Select from '../Select';
+
+// Styles
 import { ButtonContainer, Form } from './styles';
 
 // Controlled Componentes = Responsabilidade do react, renderiza a cada letra
@@ -40,6 +45,25 @@ export default function ContactForm({ buttonLabel }) {
     }
   };
 
+  const handleEmailChange = ({ target }) => {
+    setEmail(target.value);
+
+    if (target.value && !isEmailValid(target.value)) {
+      const errorAlreadyExists = errors.find((error) => error.field === 'email');
+
+      if (errorAlreadyExists) {
+        return;
+      }
+
+      setErrors((prevState) => [
+        ...prevState,
+        { field: 'email', message: 'Email inválido' },
+      ]);
+    } else {
+      setErrors((prevState) => prevState.filter((error) => error.field !== 'email'));
+    }
+  };
+
   console.log(errors);
 
   return (
@@ -52,7 +76,7 @@ export default function ContactForm({ buttonLabel }) {
         <Input
           placeholder="E-mail"
           value={email}
-          onChange={({ target }) => setEmail(target.value)}
+          onChange={handleEmailChange}
         />
       </FormGroup>
 
