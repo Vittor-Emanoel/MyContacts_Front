@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import formatPhone from '../../utils/formatPhone';
 import isEmailValid from '../../utils/isEmailValid';
 
 // Components
@@ -45,18 +46,22 @@ export default function ContactForm({ buttonLabel }) {
     }
   }
 
+  function handlePhoneChange({ target }) {
+    setPhone(formatPhone(target.value));
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
     console.log({
       name,
       email,
-      phone,
+      phone: phone.replace(/\D/g, ''),
       category,
     });
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} noValidate>
       <FormGroup error={getErrorMessageByFieldName('name')}>
         <Input
           error={getErrorMessageByFieldName('name')}
@@ -69,6 +74,7 @@ export default function ContactForm({ buttonLabel }) {
       <FormGroup error={getErrorMessageByFieldName('email')}>
         <Input
           error={getErrorMessageByFieldName('email')}
+          type="email"
           placeholder="E-mail"
           value={email}
           onChange={handleEmailChange}
@@ -79,7 +85,8 @@ export default function ContactForm({ buttonLabel }) {
         <Input
           placeholder="Telefone"
           value={phone}
-          onChange={({ target }) => setPhone(target.value)}
+          onChange={handlePhoneChange}
+          maxLength="15"
         />
       </FormGroup>
 
@@ -90,7 +97,7 @@ export default function ContactForm({ buttonLabel }) {
         >
           <option value="">Categoria</option>
           <option value="instagram">Instagram</option>
-          <option value="discord">discord</option>
+          <option value="discord">Discord</option>
         </Select>
       </FormGroup>
 
