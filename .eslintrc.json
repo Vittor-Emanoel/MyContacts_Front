@@ -1,27 +1,25 @@
 {
-    "env": {
-        "browser": true,
-        "es2021": true
+  "env": {
+    "browser": true,
+    "es2021": false
+  },
+  "extends": ["plugin:react/recommended", "airbnb", "prettier"],
+  "overrides": [],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": [
-        "plugin:react/recommended",
-        "airbnb"
-    ],
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 12,
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react"
-    ],
-    "rules": {
-        "linebreak-style": "off",
-        "react/react-in-jsx-scope": "off",
-        "react/jsx-no-bind": "off",
-        "react/jsx-filename-extension": [1, {"extensions": [".js",".jsx"]}],
-        "import/prefer-default-export": "off"
-    }
+    "ecmaVersion": 13,
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "operator-linebreak": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-filename-extension": "off",
+    "import/no-named-as-default-member": "off",
+    "react/jsx-no-bind": "off",
+    "import/prefer-default-export": "off",
+    "import/no-named-as-default" :"off"
+  }
 }
