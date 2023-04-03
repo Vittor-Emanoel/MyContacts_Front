@@ -27,7 +27,7 @@ export default function ContactForm({ buttonLabel }) {
   const { setError, removeError, getErrorMessageByFieldName, errors } =
     useErrors();
 
-  const isFormValid = name && errors.length === 0;
+  const isFormValid = (name && errors.length === 0);
 
   function handleNameChange({ target }) {
     setName(target.value);

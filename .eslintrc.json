@@ -20,8 +20,8 @@
     // "import/no-named-as-default-member": "off",
     "react/jsx-no-bind": "off",
     "no-unsafe-optional-chaining" : "off",
-    "no-nonoctal-decimal-escape": "off"
-    // "import/prefer-default-export": "off",
+    "no-nonoctal-decimal-escape": "off",
+    "import/prefer-default-export": "off"
     // "import/no-named-as-default" :"off"
   }
 }
