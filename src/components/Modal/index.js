@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import { createPortal } from 'react-dom';
-import Button from '../Button';
-import { Container, Footer, Overlay } from './styles';
+import PropTypes from 'prop-types'
+import { createPortal } from 'react-dom'
+import Button from '../Button'
+import { Container, Footer, Overlay } from './styles'
 
 export default function Modal({ danger }) {
   return createPortal(
@@ -19,14 +19,14 @@ export default function Modal({ danger }) {
         </Footer>
       </Container>
     </Overlay>,
-    document.getElementById('modal-root'),
-  );
+    document.getElementById('modal-root')
+  )
 }
 
 Modal.propTypes = {
-  danger: PropTypes.bool,
-};
+  danger: PropTypes.bool
+}
 
 Modal.defaultProps = {
-  danger: false,
-};
+  danger: false
+}
