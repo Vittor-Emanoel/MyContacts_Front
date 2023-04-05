@@ -45,7 +45,7 @@ export default function Home() {
               <img src={edit} alt="edit" />
             </Link>
             <button type="button">
-              <img src={trash} alt="delet" />
+              <img src={trash} alt="deleted" />
             </button>
           </div>
         </Card>
@@ -54,6 +54,17 @@ export default function Home() {
   );
 }
 
-fetch("http://localhost:3000/")
-.then((response) => console.log(response))
-.catch((error) => console.log(error))
+fetch("http://localhost:3001/contacts")
+.then(async (response) => {
+ const json = await response.json()
+  console.log(response)
+  console.log(json)
+})
+.catch((error) => {
+  console.log(error)
+})
+
+
+// SOP ==> Same Origin Policy -> Política de mesma origem
+// CORS ==> Cross-Origin Resource Sharing -> Compartilhamento de recursos entre origem cruzadas
+// Origem: protocolo://domínio:porta 
