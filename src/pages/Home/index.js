@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Card,
@@ -15,12 +15,11 @@ import trash from '../../assets/icons/Trash.svg';
 export default function Home() {
   const [contacts, setContacts] = useState([])
   const [orderBy, setOrderBy] = useState('asc')
-  const [searchTerm, setSearchTerm] = useState('') 
-
-  const filteredContacts = contacts.filter((contact) => (
-    contact.name.toLowerCase().startsWith(searchTerm.toLowerCase())
-  ))
-
+  const [searchTerm, setSearchTerm] = useState('')
+  
+  const filteredContacts = useMemo(() => contacts.filter((contact) => (
+        contact.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+      )), [contacts, searchTerm])
   
   useEffect(() => {
       fetch(`http://localhost:3001/contacts?orderBy=${orderBy}`)
@@ -77,8 +76,8 @@ export default function Home() {
          <div className="info">
            <div className="contact-name">
              <strong>{contact.name}</strong>
-             {contact.category_name && (
-              <small>{contact.category_name}</small>
+             {contact.categories_name && (
+              <small>{contact.categories_name}</small>
              )}
            </div>
            <span>{contact.email}</span>
