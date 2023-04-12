@@ -5,103 +5,117 @@ import {
   Container,
   Header,
   InputSearchContainer,
-  ListHeader
+  ListHeader,
 } from './styles';
+
+import Loader from '../../components/Loader';
 
 import arrow from '../../assets/icons/Arrow.svg';
 import edit from '../../assets/icons/Edit.svg';
 import trash from '../../assets/icons/Trash.svg';
 
-export default function Home() {
-  const [contacts, setContacts] = useState([])
-  const [orderBy, setOrderBy] = useState('asc')
-  const [searchTerm, setSearchTerm] = useState('')
-  
-  const filteredContacts = useMemo(() => contacts.filter((contact) => (
-        contact.name.toLowerCase().startsWith(searchTerm.toLowerCase())
-      )), [contacts, searchTerm])
-  
-  useEffect(() => {
-      fetch(`http://localhost:3001/contacts?orderBy=${orderBy}`)
-            .then(async (response) => {
-            const json = await response.json()
-            setContacts(json)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-  }, [orderBy])
+import delay from '../../utils/delay';
 
+export default function Home() {
+  const [contacts, setContacts] = useState([]);
+  const [orderBy, setOrderBy] = useState('asc');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
+  const filteredContacts = useMemo(() => contacts.filter((contact) => (
+    contact.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+  )), [contacts, searchTerm]);
+
+  useEffect(() => {
+    async function loadContacts() {
+       try {
+        setIsLoading(true);
+
+        const response = await fetch(`http://localhost:3001/contacts?orderBy=${orderBy}`)
+  
+        await delay(1000);
+  
+        const json = await response.json();
+        setContacts(json);
+
+       } catch (error) {
+        console.log('error', error);
+       } finally {
+        setIsLoading(false)
+       }
+      
+    }
+
+    loadContacts();
+  }, [orderBy]);
 
   function handleToggleOrderBy() {
     setOrderBy(
-      (prevState) => (prevState === 'asc' ? "desc" : "asc"),
-    )
+      (prevState) => (prevState === 'asc' ? 'desc' : 'asc'),
+    );
   }
 
-  function handleChangeSearchTerm({target}) {
-    setSearchTerm(target.value)
+  function handleChangeSearchTerm({ target }) {
+    setSearchTerm(target.value);
     console.log(searchTerm);
   }
 
-  
   return (
     <Container>
+      <Loader isLoading={isLoading} />
       <InputSearchContainer>
-        <input 
-          type="text" 
+        <input
+          type="text"
           placeholder="Pesquisar contato..."
           value={searchTerm}
           onChange={handleChangeSearchTerm}
         />
       </InputSearchContainer>
       <Header>
-        <strong>{filteredContacts.length} 
-        {filteredContacts.length === 1 ? " contato" : " contatos"}
+        <strong>
+          {filteredContacts.length}
+          {filteredContacts.length === 1 ? ' contato' : ' contatos'}
         </strong>
         <Link to="/new">Novo contato</Link>
       </Header>
 
-        {filteredContacts.length > 0 && (
-            <ListHeader orderBy={orderBy}>
-            <button type="button" onClick={handleToggleOrderBy}>
-              <span>Nome</span>
-              <img src={arrow} alt="Arrow" />
-            </button>
-          </ListHeader>
-        ) }
+      {filteredContacts.length > 0 && (
+        <ListHeader orderBy={orderBy}>
+          <button type="button" onClick={handleToggleOrderBy}>
+            <span>Nome</span>
+            <img src={arrow} alt="Arrow" />
+          </button>
+        </ListHeader>
+      ) }
 
-       {filteredContacts.map((contact) => (
-         <Card key={contact.id}>
-         <div className="info">
-           <div className="contact-name">
-             <strong>{contact.name}</strong>
-             {contact.categories_name && (
+      {filteredContacts.map((contact) => (
+        <Card key={contact.id}>
+          <div className="info">
+            <div className="contact-name">
+              <strong>{contact.name}</strong>
+              {contact.categories_name && (
               <small>{contact.categories_name}</small>
-             )}
-           </div>
-           <span>{contact.email}</span>
-           <span>{contact.phone}</span>
-         </div>
+              )}
+            </div>
+            <span>{contact.email}</span>
+            <span>{contact.phone}</span>
+          </div>
 
-         <div className="actions">
-           <Link to={`/edit/${contact.id}`}>
-             <img src={edit} alt="edit" />
-           </Link>
-           <button type="button">
-             <img src={trash} alt="deleted" />
-           </button>
-         </div>
-       </Card>
-       ))}
-      
+          <div className="actions">
+            <Link to={`/edit/${contact.id}`}>
+              <img src={edit} alt="edit" />
+            </Link>
+            <button type="button">
+              <img src={trash} alt="deleted" />
+            </button>
+          </div>
+        </Card>
+      ))}
+
     </Container>
   );
 }
 
-
-
-
 // SOP ==> Same Origin Policy -> Política de mesma origem
 // CORS ==> Cross-Origin Resource Sharing -> Compartilhamento de recursos entre origem cruzadas
-// Origem: protocolo://domínio:porta 
+// Origem: protocolo://domínio:porta

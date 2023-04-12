@@ -1,7 +1,14 @@
 import { createPortal } from 'react-dom';
+import propTypes from 'prop-types'
 import { Overlay } from './styles';
 
-export default function Loader() {
+
+export default function Loader({ isLoading }) {
+
+  if(!isLoading) {
+    return null
+  }
+
   return createPortal(
     <Overlay>
       <div className="spinner">
@@ -14,4 +21,8 @@ export default function Loader() {
     </Overlay>,
     document.getElementById('loader-root'),
   );
+}
+
+Loader.propTypes = {
+  isLoading: propTypes.bool.isRequired,
 }
