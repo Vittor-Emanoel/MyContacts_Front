@@ -1,60 +1,59 @@
-import { useEffect, useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useMemo, useState } from "react"
+import { Link } from "react-router-dom"
 import {
   Card,
   Container,
   Header,
   InputSearchContainer,
-  ListHeader,
-} from './styles';
+  ListHeader
+} from "./styles"
 
-import Loader from '../../components/Loader';
+import Loader from "../../components/Loader"
 
-import arrow from '../../assets/icons/Arrow.svg';
-import edit from '../../assets/icons/Edit.svg';
-import trash from '../../assets/icons/Trash.svg';
+import arrow from "../../assets/icons/Arrow.svg"
+import edit from "../../assets/icons/Edit.svg"
+import trash from "../../assets/icons/Trash.svg"
 
-import ContactsService from '../../services/ContactsService';
+import ContactsService from "../../services/ContactsService"
 
 export default function Home() {
-  const [contacts, setContacts] = useState([]);
-  const [orderBy, setOrderBy] = useState('asc');
-  const [searchTerm, setSearchTerm] = useState('');
-  const [isLoading, setIsLoading] = useState(true);
+  const [contacts, setContacts] = useState([])
+  const [orderBy, setOrderBy] = useState("asc")
+  const [searchTerm, setSearchTerm] = useState("")
+  const [isLoading, setIsLoading] = useState(true)
 
-  const filteredContacts = useMemo(() => contacts.filter((contact) => (
-    contact.name.toLowerCase().startsWith(searchTerm.toLowerCase())
-  )), [contacts, searchTerm]);
+  const filteredContacts = useMemo(
+    () =>
+      contacts.filter((contact) =>
+        contact.name.toLowerCase().startsWith(searchTerm.toLowerCase())
+      ),
+    [contacts, searchTerm]
+  )
 
   useEffect(() => {
     async function loadContacts() {
-       try {
-        setIsLoading(true);
+      try {
+        setIsLoading(true)
 
         const contactsList = await ContactsService.listContacts(orderBy)
 
-        setContacts(contactsList);
-
-       } catch (error) {
-        console.log('error', error);
-       } finally {
+        setContacts(contactsList)
+      } catch (error) {
+        console.log("Caiu no catch", error)
+      } finally {
         setIsLoading(false)
-       }
-      
+      }
     }
 
-    loadContacts();
-  }, [orderBy]);
+    loadContacts()
+  }, [orderBy])
 
   function handleToggleOrderBy() {
-    setOrderBy(
-      (prevState) => (prevState === 'asc' ? 'desc' : 'asc'),
-    );
+    setOrderBy((prevState) => (prevState === "asc" ? "desc" : "asc"))
   }
 
   function handleChangeSearchTerm({ target }) {
-    setSearchTerm(target.value);
-    console.log(searchTerm);
+    setSearchTerm(target.value)
   }
 
   return (
@@ -71,7 +70,7 @@ export default function Home() {
       <Header>
         <strong>
           {filteredContacts.length}
-          {filteredContacts.length === 1 ? ' contato' : ' contatos'}
+          {filteredContacts.length === 1 ? " contato" : " contatos"}
         </strong>
         <Link to="/new">Novo contato</Link>
       </Header>
@@ -83,7 +82,7 @@ export default function Home() {
             <img src={arrow} alt="Arrow" />
           </button>
         </ListHeader>
-      ) }
+      )}
 
       {filteredContacts.map((contact) => (
         <Card key={contact.id}>
@@ -91,7 +90,7 @@ export default function Home() {
             <div className="contact-name">
               <strong>{contact.name}</strong>
               {contact.categories_name && (
-              <small>{contact.categories_name}</small>
+                <small>{contact.categories_name}</small>
               )}
             </div>
             <span>{contact.email}</span>
@@ -108,9 +107,8 @@ export default function Home() {
           </div>
         </Card>
       ))}
-
     </Container>
-  );
+  )
 }
 
 // SOP ==> Same Origin Policy -> Política de mesma origem
