@@ -7,7 +7,8 @@ import {
   Header,
   InputSearchContainer,
   ListHeader,
-  EmptyListContainer
+  EmptyListContainer,
+  SearchNotFoundContainer
 } from "./styles"
 
 import Button from "../../components/Button"
@@ -18,6 +19,7 @@ import edit from "../../assets/icons/Edit.svg"
 import trash from "../../assets/icons/Trash.svg"
 import sad from "../../assets/images/sad.svg"
 import emptyBox from "../../assets/images/empty-box.svg"
+import magnifierQuestion from "../../assets/images/magnifier-question.svg"
 
 import ContactsService from "../../services/ContactsService"
 
@@ -94,7 +96,7 @@ export default function Home() {
         {!hasError && contacts.length > 0 && (
           <strong>
             {filteredContacts.length}
-            {filteredContacts.length === 1 ? "contato" : "contatos"}
+            {filteredContacts.length === 1 ? " contato" : " contatos"}
           </strong>
         )}
         <Link to="/new">Novo contato</Link>
@@ -125,6 +127,16 @@ export default function Home() {
                 primeiro!
               </p>
             </EmptyListContainer>
+          )}
+
+          {contacts.length > 0 && filteredContacts < 1 && (
+            <SearchNotFoundContainer>
+              <img src={magnifierQuestion} alt="MagnifierQuestion" />
+              <span>
+                Nenhum resultado foi encontrado para{" "}
+                <strong>{searchTerm}</strong>
+              </span>
+            </SearchNotFoundContainer>
           )}
 
           {filteredContacts.length > 0 && (

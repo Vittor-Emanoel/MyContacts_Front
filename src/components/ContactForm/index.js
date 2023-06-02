@@ -1,88 +1,102 @@
-import PropTypes from 'prop-types';
-import { useState } from 'react';
-import formatPhone from '../../utils/formatPhone';
-import isEmailValid from '../../utils/isEmailValid';
+/* eslint-disable no-shadow */
+import PropTypes from "prop-types"
+import { useState, useEffect } from "react"
+import formatPhone from "../../utils/formatPhone"
+import isEmailValid from "../../utils/isEmailValid"
+
+// Utils
+import CategoriesService from "../../services/CategoriesService"
 
 // Components
-import Button from '../Button';
-import FormGroup from '../FormGroup';
-import Input from '../Input';
-import Select from '../Select';
+import Button from "../Button"
+import FormGroup from "../FormGroup"
+import Input from "../Input"
+import Select from "../Select"
 
 // Styles
-import { ButtonContainer, Form } from './styles';
+import { ButtonContainer, Form } from "./styles"
 
 // CustomHooks
-import useErrors from '../../hooks/useErrors';
+import useErrors from "../../hooks/useErrors"
 
 // Controlled Componentes = Responsabilidade do react, renderiza a cada letra
 // Uncontrolled Componentes = Javascript puro(useRef)
 
 export default function ContactForm({ buttonLabel }) {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [category, setCategory] = useState('');
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [phone, setPhone] = useState("")
+  const [categoryId, setCategoryId] = useState("")
+  const [categories, setCategories] = useState([])
 
   const { setError, removeError, getErrorMessageByFieldName, errors } =
-    useErrors();
+    useErrors()
 
-  const isFormValid = (name && errors.length === 0);
+  const isFormValid = name && errors.length === 0
+
+  useEffect(() => {
+    async function loadCategories() {
+      const categoriesList = await CategoriesService.listCategories()
+
+      setCategories(categoriesList)
+    }
+    loadCategories()
+  }, [])
 
   function handleNameChange({ target }) {
-    setName(target.value);
+    setName(target.value)
 
     if (!target.value) {
       setError({
-        field: 'name',
-        message: 'Nome Obrigatório',
-      });
+        field: "name",
+        message: "Nome Obrigatório"
+      })
     } else {
-      removeError('name');
+      removeError("name")
     }
   }
 
   function handleEmailChange({ target }) {
-    setEmail(target.value);
+    setEmail(target.value)
 
     if (target.value && !isEmailValid(target.value)) {
       setError({
-        field: 'email',
-        message: 'E-mail Inválido',
-      });
+        field: "email",
+        message: "E-mail Inválido"
+      })
     } else {
-      removeError('email');
+      removeError("email")
     }
   }
 
   function handlePhoneChange({ target }) {
-    setPhone(formatPhone(target.value));
+    setPhone(formatPhone(target.value))
   }
 
   function handleSubmit(event) {
-    event.preventDefault();
+    event.preventDefault()
     console.log({
       name,
       email,
-      phone: phone.replace(/\D/g, ''),
-      category,
-    });
+      phone: phone.replace(/\D/g, ""),
+      categoryId
+    })
   }
 
   return (
     <Form onSubmit={handleSubmit} noValidate>
-      <FormGroup error={getErrorMessageByFieldName('name')}>
+      <FormGroup error={getErrorMessageByFieldName("name")}>
         <Input
-          error={getErrorMessageByFieldName('name')}
+          error={getErrorMessageByFieldName("name")}
           placeholder="Nome *"
           value={name}
           onChange={handleNameChange}
         />
       </FormGroup>
 
-      <FormGroup error={getErrorMessageByFieldName('email')}>
+      <FormGroup error={getErrorMessageByFieldName("email")}>
         <Input
-          error={getErrorMessageByFieldName('email')}
+          error={getErrorMessageByFieldName("email")}
           type="email"
           placeholder="E-mail"
           value={email}
@@ -101,12 +115,17 @@ export default function ContactForm({ buttonLabel }) {
 
       <FormGroup>
         <Select
-          value={category}
-          onChange={({ target }) => setCategory(target.value)}
+          value={categoryId}
+          onChange={({ target }) => setCategoryId(target.value)}
+          open
         >
-          <option value="">Categoria</option>
-          <option value="instagram">Instagram</option>
-          <option value="discord">Discord</option>
+          <option value="">Sem categoria</option>
+
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
         </Select>
       </FormGroup>
 
@@ -116,9 +135,9 @@ export default function ContactForm({ buttonLabel }) {
         </Button>
       </ButtonContainer>
     </Form>
-  );
+  )
 }
 
 ContactForm.propTypes = {
-  buttonLabel: PropTypes.string.isRequired,
-};
+  buttonLabel: PropTypes.string.isRequired
+}

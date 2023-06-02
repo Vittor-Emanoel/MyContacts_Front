@@ -3,6 +3,8 @@ import styled from "styled-components"
 export const Container = styled.div`
   margin-top: 32px;
   position: relative;
+
+  /* height: 100vh; */
 `
 
 export const InputSearchContainer = styled.div`
@@ -154,5 +156,19 @@ export const EmptyListContainer = styled.div`
     strong {
       color: ${({ theme }) => theme.colors.primary.main};
     }
+  }
+`
+
+export const SearchNotFoundContainer = styled.div`
+  display: flex;
+  margin-top: 16px;
+  align-items: flex-start;
+
+  width: 100%;
+
+  span {
+    color: ${({ theme }) => theme.colors.gray[200]};
+    margin-left: 24px;
+    word-break: break-word;
   }
 `
