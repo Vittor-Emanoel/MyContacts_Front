@@ -22,20 +22,18 @@
     "react-hooks"
   ],
   "rules": {
-    "operator-linebreak": "off",
     "react/react-in-jsx-scope": "off",
-    "react/jsx-filename-extension": "off",
-    // "import/no-named-as-default-member": "off",
-    "react/jsx-no-bind": "off",
-    "no-unsafe-optional-chaining": "off",
-    "no-nonoctal-decimal-escape": "off",
+    "react/jsx-filename-extension": [
+      1, {"extensions": [".js", ".jsx"]}
+    ],
+
     "import/prefer-default-export": "off",
-    "import/extensions": "off",
-    "react/prop-types": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "class-methods-use-this": "off",
-    // "import/no-named-as-default" :"off",
-    "prefer-const": "off"
+    "prefer-const": "off",
+    "no-empty": ["error", { "allowEmptyCatch": true }],
+    "no-unsafe-optional-chaining": "off",
+    "no-nonoctal-decimal-escape": "off"
   }
 }
