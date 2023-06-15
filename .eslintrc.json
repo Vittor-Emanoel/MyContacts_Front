@@ -34,6 +34,7 @@
     "prefer-const": "off",
     "no-empty": ["error", { "allowEmptyCatch": true }],
     "no-unsafe-optional-chaining": "off",
-    "no-nonoctal-decimal-escape": "off"
+    "no-nonoctal-decimal-escape": "off",
+    "react/jsx-no-bind": "off"
   }
 }
