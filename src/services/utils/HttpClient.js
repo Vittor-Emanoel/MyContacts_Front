@@ -34,9 +34,10 @@ class HttpClient {
     }
 
     if(options.headers) {
-          Object.keys(options.headers).forEach((name) => {
-            headers.append(name, options.headers[name])
-          })
+
+          // Object.keys(options.headers).forEach((name) => {
+          //   headers.append(name, options.headers[name])
+          // })
 
           Object.entries(options.headers).forEach(([key, value]) => {
             headers.append(key, value)
