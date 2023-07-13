@@ -85,7 +85,8 @@ export default function ContactForm({ buttonLabel, onSubmit }) {
     onSubmit({
       name,
       email,
-      phone: phone.replace(/\D/g, ""),
+      phone,
+      // phone: phone.replace(/\D/g, ""),
       categoryId
     })
   }
