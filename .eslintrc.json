@@ -17,15 +17,10 @@
     "ecmaVersion": 11,
     "sourceType": "module"
   },
-  "plugins": [
-    "react",
-    "react-hooks"
-  ],
+  "plugins": ["react", "react-hooks"],
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "react/jsx-filename-extension": [
-      1, {"extensions": [".js", ".jsx"]}
-    ],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
 
     "import/prefer-default-export": "off",
     "react-hooks/rules-of-hooks": "error",
@@ -35,6 +30,7 @@
     "no-empty": ["error", { "allowEmptyCatch": true }],
     "no-unsafe-optional-chaining": "off",
     "no-nonoctal-decimal-escape": "off",
-    "react/jsx-no-bind": "off"
+    "react/jsx-no-bind": "off",
+    "react/no-unstable-nested-components": "off"
   }
 }
