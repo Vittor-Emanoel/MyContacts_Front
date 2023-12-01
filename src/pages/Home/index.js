@@ -1,13 +1,13 @@
-import { useEffect, useMemo, useState, useCallback } from "react"
+import { useCallback, useEffect, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 import {
   Card,
   Container,
+  EmptyListContainer,
   ErrorContainer,
   Header,
   InputSearchContainer,
   ListHeader,
-  EmptyListContainer,
   SearchNotFoundContainer
 } from "./styles"
 
@@ -17,9 +17,11 @@ import Loader from "../../components/Loader"
 import arrow from "../../assets/icons/Arrow.svg"
 import edit from "../../assets/icons/Edit.svg"
 import trash from "../../assets/icons/Trash.svg"
-import sad from "../../assets/images/sad.svg"
 import emptyBox from "../../assets/images/empty-box.svg"
 import magnifierQuestion from "../../assets/images/magnifier-question.svg"
+import sad from "../../assets/images/sad.svg"
+
+import Modal from "../../components/Modal"
 
 import ContactsService from "../../services/ContactsService"
 
@@ -29,6 +31,8 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState("")
   const [isLoading, setIsLoading] = useState(true)
   const [hasError, setHasError] = useState(false)
+  const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false)
+  const [contactBeingDeleted, setContactBeingDeleted] = useState(null)
 
   const filteredContacts = useMemo(
     () =>
@@ -69,9 +73,34 @@ export default function Home() {
     loadContacts()
   }
 
+  function handleDeleteContact(contact) {
+    setContactBeingDeleted(contact)
+    setIsDeleteModalVisible(true)
+  }
+
+  function handleCloseDeleteModal() {
+    setIsDeleteModalVisible(false)
+  }
+
+  function handleConfirmDeleteContact() {
+    console.log(contactBeingDeleted.id)
+  }
+
   return (
     <Container>
       <Loader isLoading={isLoading} />
+
+      <Modal
+        danger
+        confirmLabel="Deletar"
+        visible={isDeleteModalVisible}
+        title={`Tem certeza que deseja remover o contato "${contactBeingDeleted?.name}"?`}
+        onCancel={handleCloseDeleteModal}
+        onConfirm={handleConfirmDeleteContact}
+      >
+        <p>Está ação não poderá ser desfeita!</p>
+      </Modal>
+
       {contacts.length > 0 && (
         <InputSearchContainer>
           <input
@@ -165,7 +194,10 @@ export default function Home() {
                 <Link to={`/edit/${contact.id}`}>
                   <img src={edit} alt="edit" />
                 </Link>
-                <button type="button">
+                <button
+                  type="button"
+                  onClick={() => handleDeleteContact(contact)}
+                >
                   <img src={trash} alt="deleted" />
                 </button>
               </div>
