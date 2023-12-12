@@ -44,6 +44,11 @@ export const Footer = styled.footer`
   .cancel-button {
     background: transparent;
     border: none;
+    font-size: 16px;
     color: ${({ theme }) => theme.colors.gray[200]};
+
+    &:disabled {
+      cursor: not-allowed;
+    }
   }
 `
