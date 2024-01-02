@@ -17,6 +17,7 @@ import { ButtonContainer, Form } from "./styles"
 
 // CustomHooks
 import useErrors from "../../hooks/useErrors"
+import useStateAsyncState from "../../hooks/useSafeAsyncState"
 
 // Controlled Componentes = Responsabilidade do react, renderiza a cada letra
 // Uncontrolled Componentes = Javascript puro(useRef)
@@ -26,8 +27,8 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
   const [categoryId, setCategoryId] = useState("")
-  const [categories, setCategories] = useState([])
-  const [isLoadingCategories, setIsLoadingCategories] = useState(true)
+  const [categories, setCategories] = useStateAsyncState([])
+  const [isLoadingCategories, setIsLoadingCategories] = useStateAsyncState(true)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const { setError, removeError, getErrorMessageByFieldName, errors } =
@@ -66,7 +67,7 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
       }
     }
     loadCategories()
-  }, [])
+  }, [setCategories, setIsLoadingCategories])
 
   function handleNameChange({ target }) {
     setName(target.value)
