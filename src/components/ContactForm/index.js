@@ -95,8 +95,8 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
     }
   }
 
-  function handlePhoneChange({ target }) {
-    setPhone(formatPhone(target.value))
+  function handlePhoneChange(event) {
+    setPhone(formatPhone(event.target.value))
   }
 
   async function handleSubmit(event) {
@@ -140,7 +140,7 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
       <FormGroup>
         <Input
           placeholder="Telefone"
-          defaultValue={phone}
+          value={phone}
           onChange={handlePhoneChange}
           maxLength="15"
           disabled={isSubmitting}
