@@ -48,7 +48,6 @@ export default function Home() {
     try {
       setIsLoading(true)
 
-      // const contactsList = []
       const contactsList = await ContactsService.listContacts(orderBy)
 
       setHasError(false)
@@ -209,7 +208,7 @@ export default function Home() {
                 <div className="contact-name">
                   <strong>{contact.name}</strong>
                   {contact.categories_name && (
-                    <small>{contact.categories_name}</small>
+                    <small>{contact.category.name}</small>
                   )}
                 </div>
                 <span>{contact.email}</span>
