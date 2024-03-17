@@ -106,13 +106,14 @@ export default function useContactForm(onSubmit, ref) {
     getErrorMessageByFieldName,
     handleNameChange,
     name,
+    isSubmitting,
     email,
     handleEmailChange,
     phone,
     handlePhoneChange,
-    categoryId,
     isLoadingCategories,
-    isSubmitting,
+    categoryId,
+    setCategoryId,
     categories,
     isFormValid
   }

@@ -13,23 +13,20 @@ import { ButtonContainer, Form } from "./styles"
 // CustomHooks
 import useContactForm from "./useContactForm"
 
-// Controlled Componentes = Responsabilidade do react, renderiza a cada letra
-// Uncontrolled Componentes = Javascript puro(useRef)
-
 const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
   const {
     handleSubmit,
     getErrorMessageByFieldName,
-    handleNameChange,
     name,
+    handleNameChange,
+    isSubmitting,
     email,
     handleEmailChange,
     phone,
     handlePhoneChange,
+    isLoadingCategories,
     categoryId,
     setCategoryId,
-    isLoadingCategories,
-    isSubmitting,
     categories,
     isFormValid
   } = useContactForm(onSubmit, ref)

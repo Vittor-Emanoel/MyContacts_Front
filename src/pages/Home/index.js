@@ -21,26 +21,25 @@ import magnifierQuestion from "../../assets/images/magnifier-question.svg"
 import sad from "../../assets/images/sad.svg"
 
 import Modal from "../../components/Modal"
-
 import useHome from "./useHome"
 
 export default function Home() {
   const {
-    handleConfirmDeleteContact,
-    handleDeleteContact,
-    handleTryAgain,
-    handleChangeSearchTerm,
-    handleCloseDeleteModal,
-    handleToggleOrderBy,
-    isDeleteModalVisible,
-    contactBeingDeleted,
-    filteredContacts,
-    isLoadingDelete,
-    searchTerm,
     isLoading,
-    orderBy,
+    isLoadingDelete,
+    handleConfirmDeleteContact,
+    handleTryAgain,
+    handleDeleteContact,
+    handleToggleOrderBy,
+    handleChangeSearchTerm,
+    filteredContacts,
+    isDeleteModalVisible,
     hasError,
-    contacts
+    contactBeingDeleted,
+    handleCloseDeleteModal,
+    contacts,
+    searchTerm,
+    orderBy
   } = useHome()
 
   return (
