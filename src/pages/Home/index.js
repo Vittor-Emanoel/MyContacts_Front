@@ -4,12 +4,14 @@ import Loader from "../../components/Loader"
 
 import Modal from "../../components/Modal"
 import ContactsList from "./components/ContactsList"
-import EmptyList from "./components/EmptyList"
 import ErrorStatus from "./components/ErrorSttatus"
 import Header from "./components/Header"
 import InputSearch from "./components/InputSearch"
-import SearchNotFound from "./components/SearchNotFound"
 import useHome from "./useHome"
+
+import EmptyList from "./components/EmptyList"
+
+import SearchNotFound from "./components/SearchNotFound"
 
 export default function Home() {
   const {
@@ -30,11 +32,15 @@ export default function Home() {
     orderBy
   } = useHome()
 
+  const hasContacts = contacts.length > 0
+  const isListEmpty = !hasError && !isLoading && !hasContacts
+  const isSearchEmpty = !hasError && hasContacts && filteredContacts.length < 1
+
   return (
     <Container>
       <Loader isLoading={isLoading} />
 
-      {contacts.length > 0 && (
+      {hasContacts && (
         <InputSearch value={searchTerm} onChange={handleChangeSearchTerm} />
       )}
 
@@ -45,15 +51,11 @@ export default function Home() {
       />
 
       {hasError && <ErrorStatus onTryAgain={handleTryAgain} />}
+      {isListEmpty && <EmptyList />}
+      {isSearchEmpty && <SearchNotFound searchTerm={searchTerm} />}
 
-      {!hasError && (
+      {hasContacts && (
         <>
-          {contacts.length < 1 && !isLoading && <EmptyList />}
-
-          {contacts.length > 0 && filteredContacts < 1 && (
-            <SearchNotFound searchTerm={searchTerm} />
-          )}
-
           <ContactsList
             orderBy={orderBy}
             filteredContacts={filteredContacts}
