@@ -1,4 +1,42 @@
-import styled from "styled-components"
+import styled, { css, keyframes } from "styled-components"
+
+const fadeIn = keyframes`
+  from { opacity:  0 }
+
+    to { opacity: 1 }
+  
+`
+
+const fadeOut = keyframes`
+  from { opacity:  1 }
+
+  to {opacity: 0}
+  
+`
+
+const scaleOut = keyframes`
+      from {
+    transform:  scale(1)
+    }
+
+    to {
+      transform:  scale(0)
+
+    }
+
+`
+
+const scaleIn = keyframes`
+  from {
+    transform:  scale(0)
+    }
+
+    to {
+      transform:  scale(1)
+
+    }
+  
+`
 
 export const Overlay = styled.div`
   background: rgba(0, 0, 0, 0.6);
@@ -11,6 +49,14 @@ export const Overlay = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  animation: ${fadeIn} 0.3s;
+
+  ${({ isLeaving }) =>
+    isLeaving &&
+    css`
+      animation: ${fadeOut} 0.2s forwards;
+    `}
 `
 
 export const Container = styled.div`
@@ -20,7 +66,7 @@ export const Container = styled.div`
   max-width: 450px;
   min-height: 204px;
   padding: 24px;
-
+  animation: ${scaleIn} 0.3s;
   box-shadow: 0px 4px 10px 0px #0000000a;
 
   > h1 {
@@ -32,6 +78,12 @@ export const Container = styled.div`
   .modal-body {
     margin-top: 32px;
   }
+
+  ${({ isLeaving }) =>
+    isLeaving &&
+    css`
+      animation: ${scaleOut} 0.2s forwards;
+    `}
 `
 
 export const Footer = styled.footer`

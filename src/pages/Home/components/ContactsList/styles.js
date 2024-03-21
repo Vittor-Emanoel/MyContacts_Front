@@ -62,6 +62,7 @@ export const Card = styled.div`
 
   .actions {
     display: flex;
+    justify-content: center;
     align-items: center;
 
     button {
