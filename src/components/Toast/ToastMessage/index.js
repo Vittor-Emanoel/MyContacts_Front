@@ -1,5 +1,5 @@
 import PropTypes from "prop-types"
-import { useEffect, useRef } from "react"
+import { useEffect } from "react"
 import { Container } from "./styles"
 
 import checkCircleIcon from "../../../assets/icons/check-circle.svg"
@@ -9,25 +9,8 @@ export default function ToastMessage({
   message,
   onRemoveMessage,
   isLeaving,
-  onAnimationEnd
+  animatedRef
 }) {
-  const animatedRef = useRef(null)
-
-  useEffect(() => {
-    function handleAnimationEnd() {
-      onAnimationEnd(message.id)
-    }
-
-    const elementRefElement = animatedRef.current
-    if (isLeaving) {
-      elementRefElement.addEventListener("animationend", handleAnimationEnd)
-    }
-
-    return () => {
-      elementRefElement.removeEventListener("animationend", handleAnimationEnd)
-    }
-  }, [isLeaving, message.id, onAnimationEnd])
-
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       onRemoveMessage(message.id)
@@ -68,5 +51,5 @@ ToastMessage.propTypes = {
   }).isRequired,
   onRemoveMessage: PropTypes.func.isRequired,
   isLeaving: PropTypes.bool.isRequired,
-  onAnimationEnd: PropTypes.func.isRequired
+  animatedRef: PropTypes.shape().isRequired
 }

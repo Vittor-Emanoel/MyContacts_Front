@@ -30,7 +30,23 @@ export default function useAnimatedList(initialValue = []) {
     items,
     setItems,
     handleRemoveItems,
-    handleAnimationEnd,
     renderList
   }
 }
+
+// const animatedRef = useRef(null)
+
+//   useEffect(() => {
+//     function handleAnimationEnd() {
+//       onAnimationEnd(message.id)
+//     }
+
+//     const elementRefElement = animatedRef.current
+//     if (isLeaving) {
+//       elementRefElement.addEventListener("animationend", handleAnimationEnd)
+//     }
+
+//     return () => {
+//       elementRefElement.removeEventListener("animationend", handleAnimationEnd)
+//     }
+//   }, [isLeaving, message.id, onAnimationEnd])
