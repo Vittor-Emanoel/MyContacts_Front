@@ -2,9 +2,9 @@ class CategoryMapper {
   toDomain(persistenceCategory) {
     return {
       id: persistenceCategory.id,
-      name: persistenceCategory.name
-    }
+      name: persistenceCategory.name,
+    };
   }
 }
 
-export default new CategoryMapper()
+export default new CategoryMapper();

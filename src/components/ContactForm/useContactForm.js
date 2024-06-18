@@ -1,104 +1,111 @@
-import { useEffect, useImperativeHandle, useState } from "react"
-import formatPhone from "../../utils/formatPhone"
-import isEmailValid from "../../utils/isEmailValid"
+import { useEffect, useImperativeHandle, useState } from 'react';
+import formatPhone from '../../utils/formatPhone';
+import isEmailValid from '../../utils/isEmailValid';
 
 // Utils
-import CategoriesService from "../../services/CategoriesService"
+import CategoriesService from '../../services/CategoriesService';
 
 // CustomHooks
-import useErrors from "../../hooks/useErrors"
-import useStateAsyncState from "../../hooks/useSafeAsyncState"
+import useErrors from '../../hooks/useErrors';
+import useStateAsyncState from '../../hooks/useSafeAsyncState';
 
 export default function useContactForm(onSubmit, ref) {
-  const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [phone, setPhone] = useState("")
-  const [categoryId, setCategoryId] = useState("")
-  const [categories, setCategories] = useStateAsyncState([])
-  const [isLoadingCategories, setIsLoadingCategories] = useStateAsyncState(true)
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [categoryId, setCategoryId] = useState('');
+  const [categories, setCategories] = useStateAsyncState([]);
+  const [isLoadingCategories, setIsLoadingCategories] = useStateAsyncState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const { setError, removeError, getErrorMessageByFieldName, errors } =
-    useErrors()
+  const {
+    setError, removeError, getErrorMessageByFieldName, errors,
+  } = useErrors();
 
-  const isFormValid = name && errors.length === 0
+  const isFormValid = name && errors.length === 0;
 
   useImperativeHandle(
     ref,
     () => ({
       setFieldsValues: (contact) => {
-        setName(contact.name ?? "")
-        setEmail(contact.email ?? "")
-        setPhone(formatPhone(contact.phone) ?? "")
-        setCategoryId(contact.category.id ?? "")
+        setName(contact.name ?? '');
+        setEmail(contact.email ?? '');
+        setPhone(formatPhone(contact.phone) ?? '');
+        setCategoryId(contact.category.id ?? '');
       },
       resetFields: () => {
-        setName("")
-        setEmail("")
-        setPhone("")
-        setCategoryId("")
-      }
+        setName('');
+        setEmail('');
+        setPhone('');
+        setCategoryId('');
+      },
     }),
-    []
-  )
+    [],
+  );
 
   useEffect(() => {
+    const controller = new AbortController();
+
     async function loadCategories() {
       try {
-        const categoriesList = await CategoriesService.listCategories()
+        const categoriesList = await CategoriesService.listCategories(controller.signal);
 
-        setCategories(categoriesList)
+        setCategories(categoriesList);
       } catch {
       } finally {
-        setIsLoadingCategories(false)
+        setIsLoadingCategories(false);
       }
     }
-    loadCategories()
-  }, [setCategories, setIsLoadingCategories])
+    loadCategories();
+
+    return () => {
+      controller.abort();
+    };
+  }, [setCategories, setIsLoadingCategories]);
 
   function handleNameChange({ target }) {
-    setName(target.value)
+    setName(target.value);
 
     if (!target.value) {
       setError({
-        field: "name",
-        message: "Nome Obrigatório"
-      })
+        field: 'name',
+        message: 'Nome Obrigatório',
+      });
     } else {
-      removeError("name")
+      removeError('name');
     }
   }
 
   function handleEmailChange({ target }) {
-    setEmail(target.value)
+    setEmail(target.value);
 
     if (target.value && !isEmailValid(target.value)) {
       setError({
-        field: "email",
-        message: "E-mail Inválido"
-      })
+        field: 'email',
+        message: 'E-mail Inválido',
+      });
     } else {
-      removeError("email")
+      removeError('email');
     }
   }
 
   function handlePhoneChange(event) {
-    setPhone(formatPhone(event.target.value))
+    setPhone(formatPhone(event.target.value));
   }
 
   async function handleSubmit(event) {
-    event.preventDefault()
-    setIsSubmitting(true)
+    event.preventDefault();
+    setIsSubmitting(true);
 
     await onSubmit({
       name,
       email,
       phone,
       // phone: phone.replace(/\D/g, ""),
-      categoryId
-    })
+      categoryId,
+    });
 
-    setIsSubmitting(false)
+    setIsSubmitting(false);
   }
 
   return {
@@ -115,6 +122,6 @@ export default function useContactForm(onSubmit, ref) {
     categoryId,
     setCategoryId,
     categories,
-    isFormValid
-  }
+    isFormValid,
+  };
 }
