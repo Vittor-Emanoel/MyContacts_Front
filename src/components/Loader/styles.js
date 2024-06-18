@@ -1,18 +1,18 @@
-import styled, { css, keyframes } from "styled-components"
+import styled, { css, keyframes } from 'styled-components';
 
 const fadeOut = keyframes`
   from { opacity:  1 }
 
   to {opacity: 0}
   
-`
+`;
 
 const fadeIn = keyframes`
   from { opacity:  0 }
 
     to { opacity: 1 }
   
-`
+`;
 
 export const Overlay = styled.div`
   width: 100%;
@@ -26,9 +26,8 @@ export const Overlay = styled.div`
   justify-content: center;
 
   animation: ${fadeIn} 0.3s;
-  ${({ isLeaving }) =>
-    isLeaving &&
-    css`
-      animation: ${fadeOut} 0.2s;
+  ${({ isLeaving }) => isLeaving
+    && css`
+      animation: ${fadeOut} 0.2s forwards;
     `}
-`
+`;

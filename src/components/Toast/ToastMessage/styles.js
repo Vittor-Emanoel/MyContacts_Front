@@ -1,4 +1,4 @@
-import styled, { css, keyframes } from "styled-components"
+import styled, { css, keyframes } from 'styled-components';
 
 const messageIn = keyframes`
   from {
@@ -11,7 +11,7 @@ const messageIn = keyframes`
     transform: translateY(0px)
   }
 
-`
+`;
 
 const messageOut = keyframes`
   from {
@@ -24,7 +24,7 @@ const messageOut = keyframes`
     transform: translateY(1000px)
   }
 
-`
+`;
 
 const containerVariants = {
   default: css`
@@ -35,8 +35,8 @@ const containerVariants = {
   `,
   danger: css`
     background: ${({ theme }) => theme.colors.danger.main};
-  `
-}
+  `,
+};
 
 export const Container = styled.div`
   padding: 16px 32px;
@@ -50,10 +50,9 @@ export const Container = styled.div`
   cursor: pointer;
   animation: ${messageIn} 0.3s;
 
-  ${({ isLeaving }) =>
-    isLeaving &&
-    css`
-      animation: ${messageOut} 0.2s;
+  ${({ isLeaving }) => isLeaving
+    && css`
+      animation: ${messageOut} 0.2s forwards;
     `}
 
   ${({ type }) => containerVariants[type] || containerVariants.default} & + & {
@@ -63,4 +62,4 @@ export const Container = styled.div`
   img {
     margin-right: 8px;
   }
-`
+`;
