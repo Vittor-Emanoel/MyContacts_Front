@@ -1,31 +1,33 @@
-import { useEffect } from "react"
-import ToastMessage from "../ToastMessage"
-import { Container } from "./styles"
+import { useEffect } from 'react';
+import ToastMessage from '../ToastMessage';
+import { Container } from './styles';
 
-import useAnimatedList from "../../../hooks/useAnimatedList"
-import { toastEventManager } from "../../../utils/toast"
+import useAnimatedList from '../../../hooks/useAnimatedList';
+import { toastEventManager } from '../../../utils/toast';
 
 export default function ToastContainer() {
   const {
     setItems: setMessages,
     handleRemoveItems,
-    renderList
-  } = useAnimatedList()
+    renderList,
+  } = useAnimatedList();
 
   useEffect(() => {
     function handleAddToast({ type, text, duration }) {
       setMessages((prevState) => [
         ...prevState,
-        { id: Math.random(), type, text, duration }
-      ])
+        {
+          id: Math.random(), type, text, duration,
+        },
+      ]);
     }
 
-    toastEventManager.on("addtoast", handleAddToast)
+    toastEventManager.on('addtoast', handleAddToast);
 
     return () => {
-      toastEventManager.removeListener("addtoast", handleAddToast)
-    }
-  }, [setMessages])
+      toastEventManager.removeListener('addtoast', handleAddToast);
+    };
+  }, [setMessages]);
 
   return (
     <Container>
@@ -39,5 +41,5 @@ export default function ToastContainer() {
         />
       ))}
     </Container>
-  )
+  );
 }

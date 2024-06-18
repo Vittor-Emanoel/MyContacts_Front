@@ -1,9 +1,9 @@
- function delay(ms = 1000 ) {
+function delay(ms = 1000) {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve()
-    }, ms)
-  })
+      resolve();
+    }, ms);
+  });
 }
 
-export default delay
+export default delay;

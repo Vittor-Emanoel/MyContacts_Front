@@ -1,17 +1,17 @@
-import { Container } from "./styles"
+import { Container } from './styles';
 
-import Loader from "../../components/Loader"
+import Loader from '../../components/Loader';
 
-import Modal from "../../components/Modal"
-import ContactsList from "./components/ContactsList"
-import ErrorStatus from "./components/ErrorSttatus"
-import Header from "./components/Header"
-import InputSearch from "./components/InputSearch"
-import useHome from "./useHome"
+import Modal from '../../components/Modal';
+import ContactsList from './components/ContactsList';
+import ErrorStatus from './components/ErrorStatus';
+import Header from './components/Header';
+import InputSearch from './components/InputSearch';
+import useHome from './useHome';
 
-import EmptyList from "./components/EmptyList"
+import EmptyList from './components/EmptyList';
 
-import SearchNotFound from "./components/SearchNotFound"
+import SearchNotFound from './components/SearchNotFound';
 
 export default function Home() {
   const {
@@ -29,12 +29,13 @@ export default function Home() {
     handleCloseDeleteModal,
     contacts,
     searchTerm,
-    orderBy
-  } = useHome()
+    orderBy,
+    isPending,
+  } = useHome();
 
-  const hasContacts = contacts.length > 0
-  const isListEmpty = !hasError && !isLoading && !hasContacts
-  const isSearchEmpty = !hasError && hasContacts && filteredContacts.length < 1
+  const hasContacts = contacts.length > 0;
+  const isListEmpty = !hasError && !isLoading && !hasContacts;
+  const isSearchEmpty = !hasError && hasContacts && filteredContacts.length < 1;
 
   return (
     <Container>
@@ -56,6 +57,7 @@ export default function Home() {
 
       {hasContacts && (
         <>
+          {isPending && <h1>carregando</h1>}
           <ContactsList
             orderBy={orderBy}
             filteredContacts={filteredContacts}
@@ -77,7 +79,7 @@ export default function Home() {
         </>
       )}
     </Container>
-  )
+  );
 }
 
 // SOP ==> Same Origin Policy -> Política de mesma origem

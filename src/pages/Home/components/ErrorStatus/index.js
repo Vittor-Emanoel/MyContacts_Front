@@ -1,8 +1,8 @@
-import PropTypes from "prop-types"
+import PropTypes from 'prop-types';
 
-import sad from "../../../../assets/images/sad.svg"
-import Button from "../../../../components/Button"
-import { Container } from "./styles"
+import sad from '../../../../assets/images/sad.svg';
+import Button from '../../../../components/Button';
+import { Container } from './styles';
 
 export default function ErrorStatus({ onTryAgain }) {
   return (
@@ -16,9 +16,9 @@ export default function ErrorStatus({ onTryAgain }) {
         </Button>
       </div>
     </Container>
-  )
+  );
 }
 
 ErrorStatus.propTypes = {
-  onTryAgain: PropTypes.func.isRequired
-}
+  onTryAgain: PropTypes.func.isRequired,
+};

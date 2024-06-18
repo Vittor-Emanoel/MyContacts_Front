@@ -1,14 +1,14 @@
-import PropTypes from "prop-types"
-import { StyledSpinner } from "./styles"
+import PropTypes from 'prop-types';
+import { StyledSpinner } from './styles';
 
-export default function Spinner({ size }) {
-  return <StyledSpinner size={size} />
+export default function Spinner({ size = 32 }) {
+  return <StyledSpinner size={size} />;
 }
 
 Spinner.propTypes = {
-  size: PropTypes.number
-}
+  size: PropTypes.number,
+};
 
 Spinner.defaultProps = {
-  size: 32
-}
+  size: 32,
+};

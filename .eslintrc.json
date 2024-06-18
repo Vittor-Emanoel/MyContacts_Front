@@ -6,7 +6,6 @@
   "extends": [
     "plugin:react/recommended",
     "airbnb",
-    "prettier",
     "plugin:react-hooks/recommended"
   ],
   "overrides": [],
@@ -31,6 +30,7 @@
     "no-unsafe-optional-chaining": "off",
     "no-nonoctal-decimal-escape": "off",
     "react/jsx-no-bind": "off",
-    "react/no-unstable-nested-components": "off"
+    "react/no-unstable-nested-components": "off",
+    "max-len": "off"
   }
 }

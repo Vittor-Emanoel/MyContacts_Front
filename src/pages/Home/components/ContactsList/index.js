@@ -1,17 +1,17 @@
-import PropsTypes from "prop-types"
+import PropsTypes from 'prop-types';
+import { memo } from 'react';
+import { Link } from 'react-router-dom';
+import arrow from '../../../../assets/icons/Arrow.svg';
+import edit from '../../../../assets/icons/Edit.svg';
+import trash from '../../../../assets/icons/Trash.svg';
 
-import { Link } from "react-router-dom"
-import arrow from "../../../../assets/icons/Arrow.svg"
-import edit from "../../../../assets/icons/Edit.svg"
-import trash from "../../../../assets/icons/Trash.svg"
+import { Card, ListHeader } from './styles';
 
-import { Card, ListHeader } from "./styles"
-
-export default function ContactsList({
+function ContactsList({
   filteredContacts,
   orderBy,
   onToggleOrderBy,
-  onDeleteContact
+  onDeleteContact,
 }) {
   return (
     <>
@@ -48,7 +48,7 @@ export default function ContactsList({
         </Card>
       ))}
     </>
-  )
+  );
 }
 
 ContactsList.propTypes = {
@@ -59,11 +59,13 @@ ContactsList.propTypes = {
       email: PropsTypes.string,
       phone: PropsTypes.string,
       category: PropsTypes.shape({
-        name: PropsTypes.string
-      })
-    })
+        name: PropsTypes.string,
+      }),
+    }),
   ).isRequired,
   orderBy: PropsTypes.string.isRequired,
   onToggleOrderBy: PropsTypes.func.isRequired,
-  onDeleteContact: PropsTypes.func.isRequired
-}
+  onDeleteContact: PropsTypes.func.isRequired,
+};
+
+export default memo(ContactsList);
