@@ -1,9 +1,9 @@
-import ContactForm from "../../components/ContactForm"
-import PageHeader from "../../components/PageHeader"
-import useNewContact from "./useNewContact"
+import ContactForm from '../../components/ContactForm';
+import PageHeader from '../../components/PageHeader';
+import useNewContact from './useNewContact';
 
 export default function NewContact() {
-  const { handleSubmit, contactFormRef } = useNewContact()
+  const { handleSubmit, contactFormRef } = useNewContact();
 
   return (
     <>
@@ -14,5 +14,5 @@ export default function NewContact() {
         onSubmit={handleSubmit}
       />
     </>
-  )
+  );
 }

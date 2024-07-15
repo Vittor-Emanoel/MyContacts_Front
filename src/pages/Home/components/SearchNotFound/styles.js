@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -12,4 +12,4 @@ export const Container = styled.div`
     margin-left: 24px;
     word-break: break-word;
   }
-`
+`;

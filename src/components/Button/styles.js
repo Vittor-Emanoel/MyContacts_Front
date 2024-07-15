@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components"
+import styled, { css } from 'styled-components';
 
 export const StyledButton = styled.button`
   height: 52px;
@@ -27,9 +27,8 @@ export const StyledButton = styled.button`
     cursor: default;
   }
 
-  ${({ theme, danger }) =>
-    danger &&
-    css`
+  ${({ theme, danger }) => danger
+    && css`
       background: ${theme.colors.danger.main};
 
       &:hover {
@@ -40,4 +39,4 @@ export const StyledButton = styled.button`
         background: ${theme.colors.danger.dark};
       }
     `}
-`
+`;

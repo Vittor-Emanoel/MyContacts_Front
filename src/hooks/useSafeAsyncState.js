@@ -1,19 +1,19 @@
-import { useCallback, useState } from "react"
-import useIsMounted from "./useIsMounted"
+import { useCallback, useState } from 'react';
+import useIsMounted from './useIsMounted';
 
 export default function useStateAsyncState(initialState) {
-  const [state, setState] = useState(initialState)
+  const [state, setState] = useState(initialState);
 
-  const isMounted = useIsMounted()
+  const isMounted = useIsMounted();
 
   const setSafeAsyncState = useCallback(
     (data) => {
       if (isMounted()) {
-        setState(data)
+        setState(data);
       }
     },
-    [isMounted]
-  )
+    [isMounted],
+  );
 
-  return [state, setSafeAsyncState]
+  return [state, setSafeAsyncState];
 }

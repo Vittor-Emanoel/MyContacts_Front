@@ -30,7 +30,7 @@ export default function useHome() {
     try {
       setIsLoading(true);
 
-      const contactsList = await ContactsService.listContacts(orderBy, { signal });
+      const contactsList = await ContactsService.listContacts(orderBy);
 
       setHasError(false);
       setContacts(contactsList);
@@ -46,7 +46,7 @@ export default function useHome() {
   }, [orderBy]);
 
   useEffect(() => {
-    const controller = AbortController();
+    const controller = new AbortController();
 
     loadContacts(controller.signal);
 

@@ -1,5 +1,5 @@
-import PropTypes from "prop-types"
-import { Container } from "./styles"
+import PropTypes from 'prop-types';
+import { Container } from './styles';
 
 export default function InputSearch({ value, onChange }) {
   return (
@@ -11,10 +11,10 @@ export default function InputSearch({ value, onChange }) {
         onChange={onChange}
       />
     </Container>
-  )
+  );
 }
 
 InputSearch.propTypes = {
   value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
-}
+  onChange: PropTypes.func.isRequired,
+};

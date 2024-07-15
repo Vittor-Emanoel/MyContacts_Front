@@ -1,8 +1,8 @@
-import PropTypes from "prop-types"
-import useAnimatedUnmount from "../../hooks/useAnimatedUnmount"
-import Button from "../Button"
-import ReactPortal from "../ReactPortal"
-import { Container, Footer, Overlay } from "./styles"
+import PropTypes from 'prop-types';
+import useAnimatedUnmount from '../../hooks/useAnimatedUnmount';
+import Button from '../Button';
+import ReactPortal from '../ReactPortal';
+import { Container, Footer, Overlay } from './styles';
 
 export default function Modal({
   title,
@@ -13,12 +13,12 @@ export default function Modal({
   confirmLabel,
   onCancel,
   onConfirm,
-  visible
+  visible,
 }) {
-  const { shouldRender, elementRef } = useAnimatedUnmount(visible)
+  const { shouldRender, elementRef } = useAnimatedUnmount(visible);
 
   if (!shouldRender) {
-    return null
+    return null;
   }
 
   return (
@@ -48,7 +48,7 @@ export default function Modal({
         </Container>
       </Overlay>
     </ReactPortal>
-  )
+  );
 }
 
 Modal.propTypes = {
@@ -60,12 +60,12 @@ Modal.propTypes = {
   cancelLabel: PropTypes.string,
   confirmLabel: PropTypes.string,
   onCancel: PropTypes.func.isRequired,
-  onConfirm: PropTypes.func.isRequired
-}
+  onConfirm: PropTypes.func.isRequired,
+};
 
 Modal.defaultProps = {
   danger: false,
   isLoading: false,
-  cancelLabel: "Cancelar",
-  confirmLabel: "Confirmar"
-}
+  cancelLabel: 'Cancelar',
+  confirmLabel: 'Confirmar',
+};

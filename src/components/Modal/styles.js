@@ -1,18 +1,18 @@
-import styled, { css, keyframes } from "styled-components"
+import styled, { css, keyframes } from 'styled-components';
 
 const fadeIn = keyframes`
   from { opacity:  0 }
 
     to { opacity: 1 }
   
-`
+`;
 
 const fadeOut = keyframes`
   from { opacity:  1 }
 
   to {opacity: 0}
   
-`
+`;
 
 const scaleOut = keyframes`
       from {
@@ -24,7 +24,7 @@ const scaleOut = keyframes`
 
     }
 
-`
+`;
 
 const scaleIn = keyframes`
   from {
@@ -36,7 +36,7 @@ const scaleIn = keyframes`
 
     }
   
-`
+`;
 
 export const Overlay = styled.div`
   background: rgba(0, 0, 0, 0.6);
@@ -52,12 +52,11 @@ export const Overlay = styled.div`
 
   animation: ${fadeIn} 0.3s;
 
-  ${({ isLeaving }) =>
-    isLeaving &&
-    css`
+  ${({ isLeaving }) => isLeaving
+    && css`
       animation: ${fadeOut} 0.2s forwards;
     `}
-`
+`;
 
 export const Container = styled.div`
   background: #ffffff;
@@ -71,20 +70,18 @@ export const Container = styled.div`
 
   > h1 {
     font-size: 22px;
-    color: ${({ theme, danger }) =>
-      danger ? theme.colors.danger.main : theme.colors.gray[900]};
+    color: ${({ theme, danger }) => (danger ? theme.colors.danger.main : theme.colors.gray[900])};
   }
 
   .modal-body {
     margin-top: 32px;
   }
 
-  ${({ isLeaving }) =>
-    isLeaving &&
-    css`
+  ${({ isLeaving }) => isLeaving
+    && css`
       animation: ${scaleOut} 0.2s forwards;
     `}
-`
+`;
 
 export const Footer = styled.footer`
   margin-top: 32px;
@@ -103,4 +100,4 @@ export const Footer = styled.footer`
       cursor: not-allowed;
     }
   }
-`
+`;

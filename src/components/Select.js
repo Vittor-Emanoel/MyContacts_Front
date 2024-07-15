@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
 export default styled.select`
   width: 100%;
@@ -23,4 +23,4 @@ export default styled.select`
     border-color: ${({ theme }) => theme.colors.gray[200]};
     opacity: 1;
   }
-`
+`;

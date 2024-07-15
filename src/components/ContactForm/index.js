@@ -1,17 +1,17 @@
-import PropTypes from "prop-types"
-import { forwardRef } from "react"
+import PropTypes from 'prop-types';
+import { forwardRef } from 'react';
 
 // Components
-import Button from "../Button"
-import FormGroup from "../FormGroup"
-import Input from "../Input"
-import Select from "../Select"
+import Button from '../Button';
+import FormGroup from '../FormGroup';
+import Input from '../Input';
+import Select from '../Select';
 
 // Styles
-import { ButtonContainer, Form } from "./styles"
+import { ButtonContainer, Form } from './styles';
 
 // CustomHooks
-import useContactForm from "./useContactForm"
+import useContactForm from './useContactForm';
 
 const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
   const {
@@ -28,14 +28,14 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
     categoryId,
     setCategoryId,
     categories,
-    isFormValid
-  } = useContactForm(onSubmit, ref)
+    isFormValid,
+  } = useContactForm(onSubmit, ref);
 
   return (
     <Form onSubmit={handleSubmit} noValidate>
-      <FormGroup error={getErrorMessageByFieldName("name")}>
+      <FormGroup error={getErrorMessageByFieldName('name')}>
         <Input
-          error={getErrorMessageByFieldName("name")}
+          error={getErrorMessageByFieldName('name')}
           placeholder="Nome *"
           value={name}
           onChange={handleNameChange}
@@ -43,9 +43,9 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
         />
       </FormGroup>
 
-      <FormGroup error={getErrorMessageByFieldName("email")}>
+      <FormGroup error={getErrorMessageByFieldName('email')}>
         <Input
-          error={getErrorMessageByFieldName("email")}
+          error={getErrorMessageByFieldName('email')}
           type="email"
           placeholder="E-mail"
           defaultValue={email}
@@ -86,12 +86,12 @@ const ContactForm = forwardRef(({ buttonLabel, onSubmit }, ref) => {
         </Button>
       </ButtonContainer>
     </Form>
-  )
-})
+  );
+});
 
 ContactForm.propTypes = {
   buttonLabel: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired
-}
+  onSubmit: PropTypes.func.isRequired,
+};
 
-export default ContactForm
+export default ContactForm;

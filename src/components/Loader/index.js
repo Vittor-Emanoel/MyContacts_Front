@@ -1,14 +1,14 @@
-import propTypes from "prop-types"
-import useAnimatedUnmount from "../../hooks/useAnimatedUnmount"
-import ReactPortal from "../ReactPortal"
-import Spinner from "../Spinner"
-import { Overlay } from "./styles"
+import propTypes from 'prop-types';
+import useAnimatedUnmount from '../../hooks/useAnimatedUnmount';
+import ReactPortal from '../ReactPortal';
+import Spinner from '../Spinner';
+import { Overlay } from './styles';
 
 export default function Loader({ isLoading }) {
-  const { shouldRender, elementRef } = useAnimatedUnmount(isLoading)
+  const { shouldRender, elementRef } = useAnimatedUnmount(isLoading);
 
   if (!shouldRender) {
-    return null
+    return null;
   }
 
   return (
@@ -17,9 +17,9 @@ export default function Loader({ isLoading }) {
         <Spinner size={90} />
       </Overlay>
     </ReactPortal>
-  )
+  );
 }
 
 Loader.propTypes = {
-  isLoading: propTypes.bool.isRequired
-}
+  isLoading: propTypes.bool.isRequired,
+};

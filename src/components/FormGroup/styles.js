@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
 export const Container = styled.div`
   & + & {
@@ -21,4 +21,4 @@ export const Container = styled.div`
     top: 18px;
     right: 16px;
   }
-`
+`;

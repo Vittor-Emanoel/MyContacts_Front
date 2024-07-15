@@ -1,37 +1,37 @@
 export default class EventManager {
   constructor() {
-    this.listeners = new Map()
+    this.listeners = new Map();
   }
 
   on(event, listener) {
     if (!this.listeners.has(event)) {
-      this.listeners.set(event, [])
+      this.listeners.set(event, []);
     }
 
-    this.listeners.get(event).push(listener)
+    this.listeners.get(event).push(listener);
   }
 
   emit(event, payload) {
     if (!this.listeners.has(event)) {
-      return
+      return;
     }
 
     this.listeners.get(event).forEach((listener) => {
-      listener(payload)
-    })
+      listener(payload);
+    });
   }
 
   removeListener(event, listenerToRemove) {
-    const listeners = this.listeners.get(event)
+    const listeners = this.listeners.get(event);
 
     if (!listeners) {
-      return
+      return;
     }
 
     const filterdListerners = listeners.filter(
-      (listener) => listener !== listenerToRemove
-    )
+      (listener) => listener !== listenerToRemove,
+    );
 
-    this.listeners.set(event, filterdListerners)
+    this.listeners.set(event, filterdListerners);
   }
 }
